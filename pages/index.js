@@ -1,6 +1,9 @@
 // React
 import React, { Component } from 'react';
 
+// Next Routes
+import { Link } from '../routes';
+
 // Semantic UI
 import {
   Button,
@@ -24,9 +27,15 @@ class CampaignIndex extends Component {
 
   renderCampaigns() {
     const items = this.props.campaigns.map(address => {
+      let route = `/campaigns/${address}`;
+
       return {
         header: address,
-        description: <a>View Campaign</a>,
+        description: (
+          <Link route={route}>
+            <a>View Campaign</a>
+          </Link>
+        ),
         fluid: true
       };
     });
@@ -38,12 +47,18 @@ class CampaignIndex extends Component {
     return (
       <Layout>
         <h3>Open Campaigns</h3>
-        <Button
-          content="Create Campaign"
-          floated="right"
-          icon="add circle"
-          primary
-        />
+
+        <Link route="/campaigns/new">
+          <a>
+            <Button
+              content="Create Campaign"
+              floated="right"
+              icon="add circle"
+              primary
+            />
+          </a>
+        </Link>
+
         { this.renderCampaigns() }
       </Layout>
     );
